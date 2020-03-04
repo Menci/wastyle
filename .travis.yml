@@ -1,4 +1,3 @@
-# Just build. We don't have tests.
 dist: bionic
 language: node_js
 node_js:
@@ -14,4 +13,4 @@ before_script:
   - ./emsdk activate latest
   - source ./emsdk_env.sh
   - popd
-script: yarn build:wasm && yarn build
+script: yarn build:wasm && yarn build && yarn test
