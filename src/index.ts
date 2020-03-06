@@ -43,11 +43,9 @@ export async function init(wasmFile: string | ArrayBuffer | Buffer): Promise<voi
   wasmExports._start(); // C++ initialization
 }
 
-function writeString(str: string, memory: WebAssembly.Memory, pointer: number) {
-  const encoder = new TextEncoder();
-  const stringData = encoder.encode(str);
-  const array = new Uint8Array(memory.buffer, pointer, str.length + 1);
-  for (let i = 0; i < str.length; i++) array[i] = stringData[i];
+function writeEncodedString(str: Uint8Array, memory: WebAssembly.Memory, pointer: number) {
+  const array = new Uint8Array(memory.buffer, pointer, str.byteLength + 1);
+  for (let i = 0; i < str.length; i++) array[i] = str[i];
   array[str.length] = 0;
 }
 
@@ -68,22 +66,27 @@ function readString(memory: WebAssembly.Memory, pointer: number) {
   return decoder.decode(array);
 }
 
+const encoder = new TextEncoder();
+
 export function format(code: string, options: string): [boolean, string] {
   if (!wasmExports) {
     throw new Error("Please call init() to load the WASM AStyle library first.");
   }
 
+  const encodedCode = encoder.encode(code);
+  const encodedOptions = encoder.encode(options);
+
   // code + options + result buffer address
-  const bufferSize = code.length + 1 + (options.length + 1) + 4;
+  const bufferSize = encodedCode.byteLength + 1 + (encodedOptions.byteLength + 1) + 4;
 
   const bufferPointer = wasmExports.alloc_buffer(bufferSize);
 
   const resultBufferPointerBufferPointer = bufferPointer;
   const codePointer = resultBufferPointerBufferPointer + 4;
-  const optionsPointer = codePointer + (code.length + 1);
+  const optionsPointer = codePointer + (encodedCode.byteLength + 1);
 
-  writeString(code, wasmExports.memory, codePointer);
-  writeString(options, wasmExports.memory, optionsPointer);
+  writeEncodedString(encodedCode, wasmExports.memory, codePointer);
+  writeEncodedString(encodedOptions, wasmExports.memory, optionsPointer);
 
   const success = !!wasmExports.wastyle(codePointer, optionsPointer, resultBufferPointerBufferPointer);
 

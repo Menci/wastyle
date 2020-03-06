@@ -58,11 +58,11 @@ The `init` function will compile and instantiate the Astyle WASM binary asynchro
 After initialization, call the synchronous function `format` to use Astyle:
 
 ```javascript
-const [success, result] = format("#include <cstdio>\nint main(){int a,*b=a,c,*d=nullptr;return -1;}", "pad-oper style=google");
+const [success, result] = format("#include <cstdio>\nint main(){int 🦄,a,*b=a,c=🦄*2,*d=nullptr;return -1;}", "pad-oper style=google");
 console.log(result);
 // #include <cstdio>
 // int main() {
-//     int a, *b = a, c, *d = nullptr;
+//     int 🦄, a, *b = a, c = 🦄 * 2, *d = nullptr;
 //     return -1;
 // }
 ```
