@@ -7,8 +7,7 @@
   "repository": "https://github.com/Menci/wastyle",
   "license": "MIT",
   "dependencies": {
-    "@wasmer/wasi": "^0.9.1",
-    "wasi": "^0.0.6"
+    "@wasmer/wasi": "^0.9.1"
   },
   "devDependencies": {
     "@types/chai": "^4.2.10",
