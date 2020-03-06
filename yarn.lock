@@ -40,10 +40,10 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-13.7.7.tgz#1628e6461ba8cc9b53196dfeaeec7b07fa6eea99"
   integrity sha512-Uo4chgKbnPNlxQwoFmYIwctkQVkMMmsAoGGU4JKwLuvBefF0pCq4FybNSnfkfRCpC7ZW7kttcC/TrRtAJsvGtg==
 
-"@wasmer/wasi@^0.9.1":
-  version "0.9.1"
-  resolved "https://registry.yarnpkg.com/@wasmer/wasi/-/wasi-0.9.1.tgz#eb3446b2e998ac9edf07d4910aceedff758a7b0d"
-  integrity sha512-dwwZy0AJ6AQTOjK2EElYae2QeGgFXLJnHxwTWHHJrP6IhcwnYSTV3K3ssrjRVgajhybsaGexifBmRJ1T5thLkw==
+"@wasmer/wasi@^0.10.0":
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/@wasmer/wasi/-/wasi-0.10.0.tgz#883221fae0d4c9ab8220e548b477f149d4bb660a"
+  integrity sha512-9toRqlH9QZDVdAn7xv3cPw/Jkl/agYyqY4TuxcEC0B9TgmuvGI0yj3TNMwbbULMm3Yi8Jla/ErpLTLkhnlhGqQ==
   dependencies:
     browser-process-hrtime "^1.0.0"
     buffer-es6 "^4.9.3"
