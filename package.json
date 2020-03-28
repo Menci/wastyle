@@ -1,6 +1,6 @@
 {
   "name": "wastyle",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "AStyle code formatter compiled to WebAssembly, for Node.js and the browser.",
   "main": "dist/index.js",
   "author": "Menci",
