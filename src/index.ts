@@ -1,4 +1,5 @@
 import { WASI } from "@wasmer/wasi";
+import { encode, decode } from "./utf8";
 
 interface WasmModuleExports {
   memory: WebAssembly.Memory;
@@ -61,20 +62,17 @@ function readString(memory: WebAssembly.Memory, pointer: number) {
 
   if (length === 0) return "";
 
-  const decoder = new TextDecoder();
   array = new Uint8Array(memory.buffer, pointer, length);
-  return decoder.decode(array);
+  return decode(array);
 }
-
-const encoder = new TextEncoder();
 
 export function format(code: string, options: string): [boolean, string] {
   if (!wasmExports) {
     throw new Error("Please call init() to load the WASM AStyle library first.");
   }
 
-  const encodedCode = encoder.encode(code);
-  const encodedOptions = encoder.encode(options);
+  const encodedCode = encode(code);
+  const encodedOptions = encode(options);
 
   // code + options + result buffer address
   const bufferSize = encodedCode.byteLength + 1 + (encodedOptions.byteLength + 1) + 4;
