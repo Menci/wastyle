@@ -31,11 +31,11 @@ export async function init(wasmFile: string | ArrayBuffer | Buffer): Promise<voi
   // Load WASI and start the module
   const wasi = new WASI({
     args: [],
-    env: {}
+    env: {},
   });
 
   const wasm = await WebAssembly.instantiate(wasmModule, {
-    wasi_snapshot_preview1: wasi.wasiImport
+    wasi_snapshot_preview1: wasi.wasiImport,
   });
 
   wasmExports = (wasm.exports as unknown) as WasmModuleExports;
