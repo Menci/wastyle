@@ -3,7 +3,7 @@ import { encode, decode } from "./utf8";
 
 interface WasmModuleExports {
   memory: WebAssembly.Memory;
-  _start: () => void;
+  _initialize: () => void;
   alloc_buffer: (size: number) => number;
   free_buffer: (buffer: number) => number;
   wastyle: (codePointer: number, optionsPointer: number, resultPointerPointer: number) => number;
@@ -31,17 +31,17 @@ export async function init(wasmFile: string | ArrayBuffer | Buffer): Promise<voi
   // Load WASI and start the module
   const wasi = new WASI({
     args: [],
-    env: {},
+    env: {}
   });
 
   const wasm = await WebAssembly.instantiate(wasmModule, {
-    wasi_snapshot_preview1: wasi.wasiImport,
+    wasi_snapshot_preview1: wasi.wasiImport
   });
 
   wasmExports = (wasm.exports as unknown) as WasmModuleExports;
   wasi.setMemory(wasmExports.memory);
 
-  wasmExports._start(); // C++ initialization
+  wasmExports._initialize(); // C++ initialization
 }
 
 function writeEncodedString(str: Uint8Array, memory: WebAssembly.Memory, pointer: number) {

@@ -2,8 +2,8 @@ const fs = require("fs");
 const expect = require("chai").expect;
 const wastyle = require("..");
 
-it("Formatter should work", async () => {
-  await wastyle.init(fs.readFileSync(require.resolve("../dist/astyle.wasm")));
+async function test(file) {
+  await wastyle.init(fs.readFileSync(require.resolve(file)));
 
   const code = "#include <cstdio>\nint main(){int 🦄,a,*b=a,c=🦄*2,*d=nullptr;return -1;}";
   const options = "pad-oper style=google";
@@ -13,4 +13,12 @@ it("Formatter should work", async () => {
   expect(result).to.be.equals(
     "#include <cstdio>\nint main() {\n    int 🦄, a, *b = a, c = 🦄 * 2, *d = nullptr;\n    return -1;\n}"
   );
+}
+
+it("Formatter (compiled with -O3) should work", async () => {
+  await test("../dist/astyle.wasm");
+});
+
+it("Formatter (compiled with -Os) should work", async () => {
+  await test("../dist/astyle-optimize-size.wasm");
 });
