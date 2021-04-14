@@ -67,10 +67,10 @@ console.log(result);
 // }
 ```
 
-Besides, you can use `wastyle/dist/wastyle-optimize-size.wasm` to reduce your Webpack dist's size.
+Besides, you can use `wastyle/dist/astyle-optimize-size.wasm` to reduce your Webpack dist's size.
 
 # Performance
-Tested on Chrome 80.0.3987.122 on an i7-6600U laptop, formatting [this](https://paste.ubuntu.com/p/NtGx85z9BK/) C++ file takes 15ms with `wastyle/dist/wastyle.wasm` and 40ms with `wastyle/dist/wastyle-optimize-size.wasm` in average of 100 samples.
+Tested on Chrome 80.0.3987.122 on an i7-6600U laptop, formatting [this](https://paste.ubuntu.com/p/NtGx85z9BK/) C++ file takes 15ms with `wastyle/dist/astyle.wasm` and 40ms with `wastyle/dist/astyle-optimize-size.wasm` in average of 100 samples.
 
 # Development
 You'll need `emcc` to build the Astyle WASM binary. Follow [this guide](https://emscripten.org/docs/getting_started/downloads.html) to install it.
